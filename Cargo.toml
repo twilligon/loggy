@@ -6,6 +6,7 @@ repository = "https://github.com/twilligon/loggy"
 keywords = ["logs", "logging", "nohup", "setsid", "disown"]
 license = "CC0-1.0"
 edition = "2021"
+rust-version = "1.79"
 
 [[bin]]
 name = "loggy"

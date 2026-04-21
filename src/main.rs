@@ -15,6 +15,9 @@ mod log;
 mod tee;
 mod util;
 
+// TODO: add "timestamp each line" feature
+// TODO: tests!
+
 fn main() {
     let mut args = env::args_os();
     let mut wrapped = PathBuf::from(args.next().unwrap());

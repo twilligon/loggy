@@ -2,7 +2,7 @@
 name = "si-loggy"
 version = "0.1.0"
 description = "Automatic logging & nohup for arbitrary commands"
-repository = "https://github.com/Standard-Intelligence/loggy"
+repository = "https://github.com/twilligon/loggy"
 keywords = ["logs", "logging", "nohup", "setsid", "disown"]
 license = "CC0-1.0"
 edition = "2021"

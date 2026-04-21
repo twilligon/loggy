@@ -19,7 +19,7 @@ sudo -E "$(command -v cargo)" install --root /usr/local si-loggy
 ### From Git
 
 ```sh
-sudo -E "$(command -v cargo)" install --root /usr/local --git https://github.com/Standard-Intelligence/loggy
+sudo -E "$(command -v cargo)" install --root /usr/local --git https://github.com/twilligon/loggy
 ```
 
 ## Usage

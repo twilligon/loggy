@@ -1,7 +1,9 @@
 # `loggy`
+
 `loggy` wraps commands and automatically tees their output to log files without modifying original programs or scripts.
 
-## Features
+## Features[^clanker]
+
 - Logs command output (stdout and stderr) to automatically-created files
 - Passthrough mode for piping: like `tee` without the need to specify a name
 - High performance: gigabytes of output per second, sub-millisecond startup time
@@ -12,7 +14,7 @@
 
 ### From source
 
-```
+```sh
 sudo -E "$(command -v cargo)" install --root /usr/local si-loggy
 ```
 
@@ -27,14 +29,16 @@ sudo -E "$(command -v cargo)" install --root /usr/local --git https://github.com
 ### Manual invocation
 
 Wrap a command with `loggy` to log its output:
-```
+
+```console
 $ loggy echo hello world
 [loggy] logging to /home/user/logs/echo-0.log
 hello world
 ```
 
 Or, pipe a command to `loggy`:
-```
+
+```console
 $ echo hello world | loggy
 [loggy] logging to /home/user/logs/loggy-14.log
 hello world
@@ -45,7 +49,8 @@ Wrapping a command (i.e. running `loggy command` or using one of the below metho
 ### Symlinks and aliases
 
 Symlink `loggy` to each program to log:
-```
+
+```sh
 ln -s /usr/local/bin/loggy /usr/local/bin/pip
 ln -s /usr/local/bin/loggy /usr/local/bin/python
 ln -s /usr/local/bin/loggy /usr/local/bin/python3
@@ -53,7 +58,7 @@ ln -s /usr/local/bin/loggy /usr/local/bin/python3
 
 When a wrapped program is run, `loggy` creates a log file in `~/logs` based on the command name and any arguments corresponding to existing files:
 
-```
+```console
 $ pip install -r requirements.txt
 [loggy] logging to /home/user/logs/pip-requirements.txt-0.log
 ```
@@ -99,6 +104,7 @@ PROMPT_COMMAND="shopt -u extdebug; ${PROMPT_COMMAND}; AT_PROMPT="
 By default, `loggy` creates logs for anything it wraps. You may want finer control than symlinks and `NO_LOGGY` offer, e.g. to log only invocations of a certain Python module. As a last resort, `loggy` loads a list of regular expressions from the first existing file out of `~/.config/loggy` and `/etc/loggy`. If one of these files exists, *and* a command is wrapped by `loggy`, it will be logged if and only if it matches one of the regular expressions from the config file.
 
 Example configuration:
+
 ```
 # Log `make` commands with any arguments
 ^make( |$)
@@ -132,3 +138,5 @@ exec tail -f -n+0 "$(ls -t | head -n1)"
 EOF
 sudo chmod +x /usr/local/bin/snoop-loggy-log
 ```
+
+[^clanker]: Yes, the README starts with a bulleted list of 4-6 features; for the record, this was written before Claude Code existed ;)

@@ -2,7 +2,7 @@ use std::{
     env,
     fs::{self, File, OpenOptions},
     io::{self, BufRead, BufReader},
-    num::NonZero,
+    num::NonZeroUsize,
     path::{Path, PathBuf},
 };
 
@@ -24,14 +24,14 @@ fn config_path() -> Option<PathBuf> {
     }
 }
 
-fn config_name_len(config: impl AsRef<Path>, args_str: &str) -> Option<NonZero<usize>> {
+fn config_name_len(config: impl AsRef<Path>, args_str: &str) -> Option<NonZeroUsize> {
     for line in BufReader::new(File::open(config).expect("failed to open config file")).lines() {
         let line = line.expect("failed to read line from config file");
         if !line.is_empty() && !line.starts_with('#') {
             match Regex::new(&line) {
                 Ok(re) => {
                     if let Some(m) = re.find(&args_str) {
-                        return NonZero::new(m.range().end);
+                        return NonZeroUsize::new(m.range().end);
                     }
                 }
                 Err(e) => panic!("could not compile regex\nregex: {line}\nerror: {e}"),
@@ -62,7 +62,7 @@ pub fn args_str_and_prefix(argv0_loggy: bool) -> Option<(String, String)> {
 
     if !argv0_loggy {
         if let Some(config) = config_path() {
-            program_name_len = config_name_len(config, &args_str).map(NonZero::get)?;
+            program_name_len = config_name_len(config, &args_str).map(NonZeroUsize::get)?;
         }
     }
 

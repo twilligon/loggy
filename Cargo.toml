@@ -6,17 +6,17 @@ repository = "https://github.com/twilligon/loggy"
 keywords = ["logs", "logging", "nohup", "setsid", "disown"]
 license = "CC0-1.0"
 edition = "2021"
-rust-version = "1.79"
+rust-version = "1.75"
 
 [[bin]]
 name = "loggy"
 path = "src/main.rs"
 
 [dependencies]
-libc = "0.2.155"
-memchr = "2.7.4"
-polling = "3.7.2"
-regex = "1.10.5"
+libc = "0.2.185"
+memchr = "2.8.0"
+polling = "3.11.0"
+regex = "1.12.3"
 
 [profile.release]
 codegen-units = 1
